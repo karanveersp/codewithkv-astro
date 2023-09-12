@@ -1,0 +1,99 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+import TagsList from "../components/TagsList.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+  .reverse();
+
+const arr = [];
+for (let i = 0; i < posts.length; i += 2) {
+  arr.push([posts[i], posts[i + 1]]);
+}
+
+const pairs = arr;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      <section>
+        {
+          posts.map((post) => (
+            <div>
+              <article>
+                <a href={`${post.slug}/`}>
+                  <h3 class="title">{post.data.title}</h3>
+                </a>
+
+                <p class="description">{post.data.description}</p>
+
+                <p>
+                  <FormattedDate date={post.data.date} />
+                </p>
+
+                <TagsList tags={post.data.tags} />
+              </article>
+            </div>
+          ))
+        }
+        <!-- {
+          pairs.map((pair) => (
+            <div class="grid">
+              {pair
+                .filter((post) => post !== undefined)
+                .map((post) => (
+                  <div>
+                    <article>
+                      <a href={`${post.slug}/`}>
+                        <h4 class="title">{post.data.title}</h4>
+                      </a>
+
+                      <p class="description">{post.data.description}</p>
+
+                      <p class="date">
+                        <FormattedDate date={post.data.date} />
+                      </p>
+
+                      {post.data.tags.map((tag) => (
+                        <a href={`tags/${tag}`} class="taglink">
+                          {tag}
+                        </a>
+                      ))}
+                    </article>
+                  </div>
+                ))}
+            </div>
+          ))
+        } -->
+      </section>
+    </main>
+    <Footer />
+    <style>
+      main {
+        padding-top: 2em;
+      }
+
+      article {
+        width: 100%;
+      }
+      .description {
+        color: var(--muted);
+      }
+
+      article {
+        text-align: center;
+      }
+    </style>
+  </body>
+</html>
