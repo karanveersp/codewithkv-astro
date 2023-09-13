@@ -16,13 +16,29 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
+
+interface Post {
+  data: {
+    date: Date;
+    draft: boolean;
+  };
+}
+
+interface Props {
+  posts: Post[];
+}
 const { posts } = Astro.props;
+
+const sortedPosts = posts
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+  .reverse();
 ---
 
 <BaseLayout title={tag} description="Tags">
   <h1>{tag}</h1>
   <section>
-    {posts.map((post: any) => <BlogPostItem post={post} />)}
+    {sortedPosts.map((post: any) => <BlogPostItem post={post} />)}
   </section>
 </BaseLayout>
 

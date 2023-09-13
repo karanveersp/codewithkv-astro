@@ -3,12 +3,36 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Karanveer Singh. All rights reserved.
+  <p>&copy; {today.getFullYear()} Karanveer Singh. All rights reserved.</p>
+  <small>
+    Made with <a href="https://astro.build" target="_blank">
+      <img id="astroLight" src="/astro-logo-dark.svg" alt="astro logo" />
+      <img id="astroDark" src="/astro-logo-light.svg" alt="astro logo" />
+    </a>
+  </small>
 </footer>
 <style>
+  img {
+    height: 1em;
+  }
+  :global(.dark) #astroDark {
+    display: inline-block;
+  }
+  :global(.dark) #astroLight {
+    display: none;
+  }
+
+  #astroLight {
+    display: inline-block;
+  }
+  #astroDark {
+    display: none;
+  }
+
   footer {
     padding: 2em 1em 6em 1em;
     color: var(--pico-h6-color);
     text-align: center;
+    align-items: center;
   }
 </style>

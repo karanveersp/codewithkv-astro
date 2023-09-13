@@ -6,7 +6,7 @@ const { post } = Astro.props;
 ---
 
 <article>
-  <a href={`${post.slug}/`}>
+  <a href={`/${post.slug}/`}>
     <h3 class="title">{post.data.title}</h3>
   </a>
 
