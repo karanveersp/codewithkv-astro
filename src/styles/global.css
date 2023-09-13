@@ -5,49 +5,71 @@
  */
 /* Orange color for light color scheme (Default) */
 /* Can be forced with data-theme="light" */
+
+:root {
+	--transition-speed: 0.3s;
+}
+
 [data-theme=light],
 :root:not([data-theme=dark]) {
-  --pico-text-selection-color: rgba(244, 93, 44, 0.25);
-  --pico-primary: #bd3c13;
-  --pico-primary-background: #d24317;
-  --pico-primary-underline: rgba(189, 60, 19, 0.5);
-  --pico-primary-hover: #942d0d;
-  --pico-primary-hover-background: #bd3c13;
-  --pico-primary-focus: rgba(244, 93, 44, 0.25);
-  --pico-primary-inverse: #fff;
+	--pico-text-selection-color: rgba(244, 93, 44, 0.25);
+	--pico-primary: #bd3c13;
+	--pico-primary-background: #d24317;
+	--pico-primary-underline: rgba(189, 60, 19, 0.5);
+	--pico-primary-hover: #942d0d;
+	--pico-primary-hover-background: #bd3c13;
+	--pico-primary-focus: rgba(244, 93, 44, 0.25);
+	--pico-primary-inverse: #fff;
 }
 
 /* Orange color for dark color scheme (Auto) */
 /* Automatically enabled if user has Dark mode enabled */
 @media only screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
-    --pico-primary: #f56b3d;
-    --pico-primary-background: #d24317;
-    --pico-primary-underline: rgba(245, 107, 61, 0.5);
-    --pico-primary-hover: #f8a283;
-    --pico-primary-hover-background: #e74b1a;
-    --pico-primary-focus: rgba(245, 107, 61, 0.25);
-    --pico-primary-inverse: #fff;
-  }
+	:root:not([data-theme]) {
+		--pico-text-selection-color: rgba(245, 107, 61, 0.1875);
+		--pico-primary: #f56b3d;
+		--pico-primary-background: #d24317;
+		--pico-primary-underline: rgba(245, 107, 61, 0.5);
+		--pico-primary-hover: #f8a283;
+		--pico-primary-hover-background: #e74b1a;
+		--pico-primary-focus: rgba(245, 107, 61, 0.25);
+		--pico-primary-inverse: #fff;
+	}
 }
 
 /* Orange color for dark color scheme (Forced) */
 /* Enabled if forced with data-theme="dark" */
 [data-theme=dark] {
-  --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
-  --pico-primary: #f56b3d;
-  --pico-primary-background: #d24317;
-  --pico-primary-underline: rgba(245, 107, 61, 0.5);
-  --pico-primary-hover: #f8a283;
-  --pico-primary-hover-background: #e74b1a;
-  --pico-primary-focus: rgba(245, 107, 61, 0.25);
-  --pico-primary-inverse: #fff;
+	--pico-text-selection-color: rgba(245, 107, 61, 0.1875);
+	--pico-primary: #f56b3d;
+	--pico-primary-background: #d24317;
+	--pico-primary-underline: rgba(245, 107, 61, 0.5);
+	--pico-primary-hover: #f8a283;
+	--pico-primary-hover-background: #e74b1a;
+	--pico-primary-focus: rgba(245, 107, 61, 0.25);
+	--pico-primary-inverse: #fff;
 }
+
+:root {
+	transition: background-color var(--transition-speed) ease !important;
+	transition: color var(--transition-speed) ease;
+}
+
+hr {
+	transition: border-top var(--transition-speed) ease;
+}
+
+article {
+	transition: background var(--transition-speed) ease;
+}
+
+html {
+	overflow-y: scroll;
+}
+
 a {
 	--pico-text-decoration: none;
 }
-
 
 a:hover {
 	color: var(--pico-primary-hover);
@@ -55,31 +77,43 @@ a:hover {
 	text-decoration: none;
 }
 
-a:hover h1 {
+a:hover #siteTitleHeading {
 	color: var(--pico-primary);
 	--pico-text-decoration: none;
 	text-decoration: none;
 }
+
+#siteTitleHeading {
+	color: var(--pico-h1-color);
+	--pico-text-decoration: none;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
 a:hover h3 {
 	color: var(--pico-primary);
 	--pico-text-decoration: none;
 	text-decoration: none;
 }
+
 nav a:active {
 	text-decoration: none;
 }
 
-main {
+body main {
+	padding-top: 2em;
 	margin-left: auto;
-    margin-right: auto;
-    max-width: 48rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+	margin-right: auto;
+	max-width: 48rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 article {
 	padding: 2em 2em;
 }
+
 /* 
 @font-face {
 	font-family: 'Atkinson';
