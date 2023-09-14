@@ -64,10 +64,12 @@ code {
     transition: color var(--transition-speed) ease;
 }
 
+/* Always show scrollbar */
 html {
     overflow-y: scroll;
 }
 
+/* Removing underlines when hovering */
 a,
 a:hover,
 #siteTitleHeading,
@@ -76,10 +78,12 @@ a:hover h3 {
     text-decoration: none;
 }
 
+/* Hover for all other links */
 a:hover {
     color: var(--pico-primary-hover);
 }
 
+/* Hover color for blog headings and site title */
 a:hover #siteTitleHeading,
 a:hover h3 {
     color: var(--pico-primary);
