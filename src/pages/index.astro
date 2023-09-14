@@ -7,23 +7,23 @@ import { getCollection } from "astro:content";
 import BlogPostItem from "../components/BlogPostItem.astro";
 
 const posts = (await getCollection("blog"))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
-  .reverse();
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+    .reverse();
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header title={SITE_TITLE} />
-    <main>
-      <section>
-        {posts.map((post) => <BlogPostItem post={post} />)}
-      </section>
-    </main>
-    <Footer />
-  </body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header title={SITE_TITLE} />
+        <main>
+            <section>
+                {posts.map((post) => <BlogPostItem post={post} />)}
+            </section>
+        </main>
+        <Footer />
+    </body>
 </html>

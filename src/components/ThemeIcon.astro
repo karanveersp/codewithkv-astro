@@ -3,88 +3,98 @@
 ---
 
 <button id="themeToggle">
-  <i id="sunIcon" class="bx bx-sun bx-sm"></i>
-  <i id="moonIcon" class="bx bxs-moon bx-sm"></i>
+    <i id="sunIcon" class="bx bx-sun bx-sm"></i>
+    <i id="moonIcon" class="bx bxs-moon bx-sm"></i>
 </button>
 
 <style>
-  #themeToggle {
-    border: none;
-    background: none;
-    padding: 0;
-    --pico-box-shadow: none;
-    transition: transform 0.4s ease;
-    --icon-color-light: #373c44;
-    --icon-color-dark: #969eaf;
-  }
+    #themeToggle {
+        border: none;
+        background: none;
+        padding: 0;
+        --pico-box-shadow: none;
+        transition: transform 0.4s ease;
+        --icon-color-light: #373c44;
+        --icon-color-dark: #969eaf;
+    }
 
-  #themeToggle:hover {
-    color: var(--pico-primary-hover);
-  }
+    #themeToggle:hover {
+        color: var(--pico-primary-hover);
+    }
 
-  .bx {
-    width: 32px;
-    height: 32px;
-  }
+    .bx {
+        width: 32px;
+        height: 32px;
+    }
 
-  #sunIcon {
-    color: var(--icon-color-light);
-  }
+    #sunIcon {
+        color: var(--icon-color-light);
+    }
 
-  #moonIcon {
-    display: none; /* Default hidden */
-    color: var(--icon-color-dark);
-  }
+    #moonIcon {
+        display: none; /* Default hidden */
+        color: var(--icon-color-dark);
+    }
 
-  #themeToggle:hover #moonIcon,
-  #themeToggle:hover #sunIcon {
-    color: var(--pico-primary-hover);
-  }
+    #themeToggle:hover #moonIcon,
+    #themeToggle:hover #sunIcon {
+        color: var(--pico-primary-hover);
+    }
 
-  :global(.dark) #sunIcon {
-    display: none;
-  }
+    :global(.dark) #sunIcon {
+        display: none;
+    }
 
-  :global(.dark) #moonIcon {
-    display: inline-block;
-  }
+    :global(.dark) #moonIcon {
+        display: inline-block;
+    }
 </style>
 
 <script is:inline>
-const theme = (() => {
-  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-    return localStorage.getItem("theme");
-  }
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    return "dark";
-  }
-  return "light";
-})();
+const setTheme = () => {
+    function enableTheme(value) {
+        const element = document.documentElement;
+        element.setAttribute("data-theme", value);
+        document.documentElement.classList.add(value);
+        document.documentElement.classList.remove(
+            value === "dark" ? "light" : "dark",
+        );
+        localStorage.setItem("theme", value);
+    }
+    const themeToggle = document.getElementById("themeToggle");
+    let currentTheme = (() => {
+        if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+        ) {
+            return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+        }
+        return "light";
+    })();
 
-if (theme === "light") {
-  document.documentElement.setAttribute("data-theme", "light");
-  document.documentElement.classList.add("light");
-} else {
-  document.documentElement.setAttribute("data-theme", "dark");
-  document.documentElement.classList.add("dark");
-}
+    if (currentTheme === "light") {
+        enableTheme("light");
+    } else {
+        enableTheme("dark");
+    }
 
-window.localStorage.setItem("theme", theme);
-
-const handleToggleClick = () => {
-  const element = document.documentElement;
-  element.classList.toggle("dark");
-  let theme = element.getAttribute("data-theme");
-  const isDark = theme === "dark";
-  if (isDark) {
-    element.setAttribute("data-theme", "light");
-  } else {
-    element.setAttribute("data-theme", "dark");
-  }
-  localStorage.setItem("theme", isDark ? "light" : "dark");
+    themeToggle.addEventListener("click", () => {
+        if (document.documentElement.hasAttribute("data-theme")) {
+            currentTheme =
+                document.documentElement.getAttribute("data-theme");
+        }
+        if (currentTheme === "light") {
+            enableTheme("dark");
+        } else {
+            enableTheme("light");
+        }
+        console.log("fired");
+    });
 };
 
-document
-  .getElementById("themeToggle")
-  .addEventListener("click", handleToggleClick);
+setTheme();
+document.addEventListener("astro:after-swap", setTheme);
 </script>

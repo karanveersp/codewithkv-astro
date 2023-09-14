@@ -4,48 +4,50 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPostItem from "../../components/BlogPostItem.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
-  return tags.map((tag) => {
-    const filteredPosts = posts.filter((post) => post.data.tags.includes(tag));
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+    const posts = await getCollection("blog");
+    const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
+    return tags.map((tag) => {
+        const filteredPosts = posts.filter((post) =>
+            post.data.tags.includes(tag),
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
 }
 
 const { tag } = Astro.params;
 
 interface Post {
-  data: {
-    date: Date;
-    draft: boolean;
-  };
+    data: {
+        date: Date;
+        draft: boolean;
+    };
 }
 
 interface Props {
-  posts: Post[];
+    posts: Post[];
 }
 const { posts } = Astro.props;
 
 const sortedPosts = posts
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
-  .reverse();
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+    .reverse();
 ---
 
-<BaseLayout title={tag} description="Tags">
-  <h1>{tag}</h1>
-  <section>
-    {sortedPosts.map((post: any) => <BlogPostItem post={post} />)}
-  </section>
+<BaseLayout title={tag} description={`Posts matching tag - ${tag}`}>
+    <h1>{tag} posts</h1>
+    <section>
+        {sortedPosts.map((post: any) => <BlogPostItem post={post} />)}
+    </section>
 </BaseLayout>
 
 <style>
-  h1 {
-    text-align: center;
-    margin-bottom: 2em;
-    text-transform: capitalize;
-  }
+    h1 {
+        text-align: center;
+        margin-bottom: 2em;
+        text-transform: capitalize;
+    }
 </style>

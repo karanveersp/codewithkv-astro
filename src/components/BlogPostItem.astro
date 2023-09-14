@@ -6,25 +6,25 @@ const { post } = Astro.props;
 ---
 
 <article>
-  <a href={`/${post.slug}/`}>
-    <h3 class="title">{post.data.title}</h3>
-  </a>
+    <a href={`/${post.slug}/`}>
+        <h3 class="title">{post.data.title}</h3>
+    </a>
 
-  <p class="description">{post.data.description}</p>
+    <p class="description">{post.data.description}</p>
 
-  <p>
-    <FormattedDate date={post.data.date} />
-  </p>
+    <p>
+        <FormattedDate date={post.data.date} />
+    </p>
 
-  <TagsList tags={post.data.tags} />
+    <TagsList tags={post.data.tags} />
 </article>
 
 <style>
-  article {
-    width: 100%;
-    text-align: center;
-  }
-  .description {
-    color: var(--muted);
-  }
+    article {
+        width: 100%;
+        text-align: center;
+    }
+    .description {
+        color: var(--muted);
+    }
 </style>

@@ -1,9 +1,9 @@
 ---
-title: 'Second post'
-description: 'Lorem ipsum dolor sit amet'
-date: 'Jul 22 2022'
-heroImage: '/blog-placeholder-4.jpg'
-tags: ['test']
+title: "Second post"
+description: "Lorem ipsum dolor sit amet"
+date: "Jul 22 2022"
+heroImage: "/blog-placeholder-4.jpg"
+tags: ["test"]
 draft: true
 ---
 

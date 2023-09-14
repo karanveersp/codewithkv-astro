@@ -12,7 +12,7 @@ _Knowledge is power_.
 
 Every programmer comes to appreciate that after doing their share of debugging.
 
-One of the best ways to gain knowledge about a system is to examine the state of the program at specific points of execution. 
+One of the best ways to gain knowledge about a system is to examine the state of the program at specific points of execution.
 Stepping through the program with a debugger is great but the age old practice of printing objects in a human readable format is also effective.
 
 Most python developers would be familiar with the `__str__` method. It's the Python equivalent of the `toString()` method in Java.
@@ -34,7 +34,7 @@ print(cool_movie)
 <__main__.Movie object at 0x7fe3f13bcfa0>
 ```
 
-It's not particularly helpful when you want to examine the state of the object. 
+It's not particularly helpful when you want to examine the state of the object.
 
 ## A Readable Representation
 
@@ -61,6 +61,7 @@ There's also a `__repr__` method which can be called on objects:
 ```python
 print(cool_movie.__repr__())
 ```
+
 ```
 <__main__.Movie object at 0x7fe3f13dd4c0>
 ```
@@ -71,10 +72,10 @@ This is like our default str method. So why are there two methods that return th
 
 The `repr` and `str` methods can both be used for debugging. However, like in many things in Python, a convention has emerged which adds some nuance to the purpose of each.
 
-* The point of the `__str__` method is to return a _human readable_ string representation
-of the object. It doesn't have to be a specific format, like we have it above with parentheses, and field names. Clarity is the main thing.
+-   The point of the `__str__` method is to return a _human readable_ string representation
+    of the object. It doesn't have to be a specific format, like we have it above with parentheses, and field names. Clarity is the main thing.
 
-* The purpose of the `__repr__` method is also to return a human readable string, but it is expected to be more formal. In fact, the convention is to return a string which could be used to _construct_ the object in that state. 
+-   The purpose of the `__repr__` method is also to return a human readable string, but it is expected to be more formal. In fact, the convention is to return a string which could be used to _construct_ the object in that state.
 
 So for our example, this would qualify as a good implementation of `__repr__`
 

@@ -6,7 +6,6 @@ description: "Organizing a stand-alone executable script"
 tags: ["python", "tutorial"]
 ---
 
-
 <br/>
 
 # Introduction
@@ -15,7 +14,7 @@ Python is an interpreted language which means that anything fed to the Python in
 For very simple scripts, that's all we need.
 
 For example, here's a script that takes an input string and returns whether the string is an isogram.
-An isogram is a word with no repeating letters, no matter the letter case. 
+An isogram is a word with no repeating letters, no matter the letter case.
 
 `Yuri` and `Jim` are isograms.
 `Jerry` and `Bob` are not isograms.
@@ -84,7 +83,7 @@ One sees the prompt `Enter a word` show up!
 
 ```sh
 > python other.py
-Enter a word:    
+Enter a word:
 ```
 
 This brings us to something every python developer should be aware of.
@@ -105,13 +104,12 @@ Python, unlike other languages, doesn't force the programmer to use a main funct
 
 Sometimes we just want to be able to import a function or a variable from another python script for re-use, but without actually running the main work of that script.
 
-To do this, the script needs some way of knowing the _context_ of its own execution. 
+To do this, the script needs some way of knowing the _context_ of its own execution.
 
 _Am I being used to import stuff?_
 _Am I being run as the main process?_
 
 Python provides the `__name__` special variable to answer this question.
-
 
 ```python
 > python
@@ -153,6 +151,7 @@ __main__
 ```
 
 Running `other.py` gives
+
 ```sh
 > python other.py
 isogram
