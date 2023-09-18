@@ -66,16 +66,21 @@ import ThemeIcon from "./ThemeIcon.astro";
         float: right;
         margin-top: 1em;
         margin-right: 1em;
+        position: relative;
     }
+   
     .topHeader {
         display: block;
         margin-top: 1em;
         width: 48rem;
         padding-top: 0;
         padding-bottom: 0;
+        padding-right: ;
+        padding-left: 2em;
         margin-left: auto;
         margin-right: auto;
     }
+
     h1 {
         color: var(--pico-h1-color);
         --pico-text-decoration: none;
@@ -83,4 +88,26 @@ import ThemeIcon from "./ThemeIcon.astro";
         margin: 0;
         padding: 0;
     }
+    
+    @media (max-width: 768px) {
+        .topHeader {
+            display: block;
+            margin-top: 1em;
+            width: fit-content;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        nav ul {
+            flex-wrap: wrap;
+        }
+        hgroup {
+            display: none;
+        } 
+    }
+
+
 </style>

@@ -28,6 +28,14 @@ const { title, description, date, updatedDate, tags } = Astro.props;
                 color: var(--color);
                 padding-top: 0;
             }
+            @media (max-width: 768px) {
+                main {
+                    width: fit-content;
+                }
+                .prose {
+                    padding: 0.5em;
+                }
+            }
             .title {
                 margin-bottom: 1em;
                 padding: 1em 0;
