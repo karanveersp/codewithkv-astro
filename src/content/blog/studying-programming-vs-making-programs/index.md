@@ -3,7 +3,7 @@ title: Studying Programming vs Making Programs
 date: Mar 10 2023
 draft: false
 description: "The important difference every programmer must know."
-tags: ["beginner"]
+tags: ["beginner", "learning"]
 ---
 
 <br/>
