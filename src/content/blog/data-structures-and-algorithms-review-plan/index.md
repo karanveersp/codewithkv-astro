@@ -1,6 +1,6 @@
 ---
 title: Data Structures and Algorithms Review Plan
-draft: false
+draft: true
 date: Sep 19 2023
 description: "The motivation and learning strategy to master DSA effectively."
 tags: ["data-structures", "beginner", "learning"]

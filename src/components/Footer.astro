@@ -1,9 +1,5 @@
----
-const today = new Date();
----
-
 <footer>
-    <p>&copy; {today.getFullYear()} Karanveer Singh. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> Karanveer Singh. All rights reserved.</p>
     <small>
         Made with <a href="https://astro.build" target="_blank">
             <img id="astroLight" src="/astro-logo-dark.svg" alt="astro logo" />
@@ -11,6 +7,16 @@ const today = new Date();
         </a>
     </small>
 </footer>
+<script>
+    function updateYear() {
+        const yearSpan = document.getElementById("year");
+        if (yearSpan !== null) {
+            yearSpan.textContent = new Date().getFullYear().toString();
+        }
+    }
+    updateYear();
+    document.addEventListener("astro:after-swap", updateYear);
+</script>
 <style>
     img {
         height: 1em;
