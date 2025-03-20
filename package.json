@@ -1,24 +1,19 @@
 {
-    "name": "codewithkv-astro",
-    "type": "module",
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev",
-        "start": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview",
-        "astro": "astro"
-    },
-    "dependencies": {
-        "@astrojs/mdx": "^1.1.5",
-        "@astrojs/rss": "^3.0.0",
-        "@astrojs/sitemap": "^3.1.2",
-        "@picocss/pico": "2.0.0-alpha1",
-        "astro": "^3.6.5",
-        "boxicons": "^2.1.4"
-    },
-    "devDependencies": {
-        "prettier": "^3.2.5",
-        "prettier-plugin-astro": "^0.12.3"
-    }
+  "name": "codewithkv-deno-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.1",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.3.0",
+    "@picocss/pico": "2.0.0-alpha1",
+    "astro": "^5.5.3",
+    "boxicons": "^2.1.4"
+  }
 }
