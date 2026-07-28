@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeWithKV — Websites for Local Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161B22;
+    --paper:#F6F3EC;
+    --paper-dim:#EDE8DC;
+    --slate:#5B6472;
+    --amber:#BD7F27;
+    --teal:#1F6F6B;
+    --line:#DDD6C4;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.1;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 clamp(24px, 6vw, 72px);}
+  :focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,243,236,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(24px, 6vw, 72px); max-width:1080px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif; font-weight:700; font-size:20px;
+    text-decoration:none;
+  }
+  .logo span{color:var(--amber);}
+  .navlinks{display:flex; gap:32px; list-style:none;}
+  .navlinks a{
+    text-decoration:none; font-size:15px; font-weight:500; color:var(--slate);
+    transition:color .15s;
+  }
+  .navlinks a:hover{color:var(--ink);}
+  .nav-cta{
+    background:var(--ink); color:var(--paper) !important;
+    padding:9px 18px; border-radius:5px; font-weight:600; font-size:14px;
+    text-decoration:none;
+  }
+
+  /* HERO */
+  .hero{padding:88px 0 64px;}
+  .eyebrow{
+    font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:18px; display:block;
+  }
+  .hero h1{
+    font-size:clamp(34px, 5.2vw, 56px);
+    max-width:820px;
+    margin-bottom:22px;
+  }
+  .hero h1 em{font-style:italic; color:var(--amber);}
+  .hero p.lede{
+    font-size:19px; color:var(--slate); max-width:560px; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-bottom:64px;}
+  .btn{
+    display:inline-block; padding:13px 26px; border-radius:5px;
+    font-weight:600; font-size:15px; text-decoration:none;
+    transition:transform .12s, box-shadow .12s;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(22,27,34,.18);}
+  .btn-ghost{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* COMPARISON SIGNATURE */
+  .compare{
+    display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:stretch;
+  }
+  .compare-card{
+    background:var(--white); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; box-shadow:0 8px 24px rgba(22,27,34,.06);
+  }
+  .compare-label{
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+  }
+  .compare-card.before .compare-label{color:#8A8375; background:#FAF8F2;}
+  .compare-card.after .compare-label{color:var(--teal); background:#F0F6F5;}
+
+  /* fake nextdoor mock */
+  .nd-mock{padding:18px; opacity:.75; filter:saturate(.7);}
+  .nd-post-head{display:flex; gap:10px; align-items:center; margin-bottom:10px;}
+  .nd-avatar{width:34px; height:34px; border-radius:50%; background:#D8D2C4;}
+  .nd-name{font-size:13px; font-weight:600;}
+  .nd-meta{font-size:11px; color:#999;}
+  .nd-body{font-size:14px; color:#444; margin-bottom:12px;}
+  .nd-replies{border-top:1px solid #eee; padding-top:10px;}
+  .nd-reply{font-size:12.5px; color:#777; margin-bottom:6px;}
+  .nd-reply b{color:#555;}
+
+  /* fake site mock */
+  .site-mock{padding:0;}
+  .browser-bar{
+    background:#F0EEE7; padding:8px 12px; display:flex; align-items:center; gap:6px;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{width:9px; height:9px; border-radius:50%; background:#D8D2C4;}
+  .browser-url{
+    flex:1; background:var(--white); border-radius:4px; padding:4px 10px;
+    font-size:11px; color:#8A8375; margin-left:8px; font-family:monospace;
+  }
+  .mini-site{padding:22px 18px;}
+  .mini-site-hero{
+    background:linear-gradient(135deg, var(--teal), #164F4C);
+    border-radius:6px; padding:24px 18px; color:white; margin-bottom:14px;
+  }
+  .mini-site-hero .b{font-family:'Fraunces',serif; font-weight:600; font-size:17px; margin-bottom:6px;}
+  .mini-site-hero .s{font-size:11.5px; opacity:.85;}
+  .mini-site-btn{
+    display:inline-block; margin-top:12px; background:var(--amber); color:white;
+    font-size:11px; font-weight:700; padding:6px 12px; border-radius:4px;
+  }
+  .mini-site-rows{display:flex; gap:8px;}
+  .mini-site-rows div{flex:1; height:38px; background:var(--paper-dim); border-radius:5px;}
+
+  .compare-arrow{
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; color:var(--slate); font-family:'Fraunces',serif;
+  }
+
+  /* SECTIONS */
+  section{padding:80px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(26px,3.6vw,36px); margin-bottom:14px;}
+  .section-head p{color:var(--slate); font-size:16.5px;}
+
+  /* FEATURES */
+  .features{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .feature{
+    background:var(--white); border:1px solid var(--line); border-radius:10px;
+    padding:26px 24px;
+  }
+  .feature .num{
+    font-family:'Fraunces',serif; font-size:13px; color:var(--amber); font-weight:700;
+    margin-bottom:10px; letter-spacing:.05em;
+  }
+  .feature h3{font-size:18px; margin-bottom:8px; font-weight:600;}
+  .feature p{font-size:14.5px; color:var(--slate);}
+
+  /* PRICING */
+  .pricing-wrap{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;
+  }
+  .price-card{
+    background:var(--ink); color:var(--paper); border-radius:14px; padding:40px 36px;
+    position:relative; overflow:hidden;
+  }
+  .price-card::after{
+    content:""; position:absolute; top:-40px; right:-40px; width:180px; height:180px;
+    border-radius:50%; background:radial-gradient(circle, rgba(189,127,39,.25), transparent 70%);
+  }
+  .price-tag-label{
+    font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
+    color:var(--amber); margin-bottom:16px; display:block;
+  }
+  .price-row{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .price-old{font-size:26px; color:#8A8B90; text-decoration:line-through; font-family:'Fraunces',serif;}
+  .price-new{font-size:52px; font-family:'Fraunces',serif; font-weight:700;}
+  .price-sub{font-size:14px; color:#B9BEC7; margin-bottom:28px;}
+  .price-list{list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:30px;}
+  .price-list li{font-size:14.5px; padding-left:22px; position:relative; color:#DEDDD6;}
+  .price-list li::before{
+    content:"✓"; position:absolute; left:0; color:var(--amber); font-weight:700;
+  }
+  .price-card .btn-primary{background:var(--amber); color:var(--ink);}
+
+  .maint-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:36px 32px; display:flex; flex-direction:column;
+  }
+  .maint-price{font-family:'Fraunces',serif; font-size:40px; font-weight:700; margin-bottom:4px;}
+  .maint-price span{font-size:16px; font-weight:500; color:var(--slate);}
+  .maint-card h3{font-size:16px; margin-bottom:16px; color:var(--slate); font-weight:600;}
+  .maint-list{list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:20px; flex:1;}
+  .maint-list li{font-size:14px; padding-left:20px; position:relative; color:var(--slate);}
+  .maint-list li::before{content:"—"; position:absolute; left:0; color:var(--teal);}
+  .maint-note{font-size:12.5px; color:#8A8375; border-top:1px solid var(--line); padding-top:14px;}
+
+  /* PORTFOLIO */
+  .portfolio-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    display:grid; grid-template-columns:1fr 1fr; overflow:hidden;
+    box-shadow:0 10px 30px rgba(22,27,34,.06);
+  }
+  .portfolio-preview{
+    background:linear-gradient(160deg,#EFE6D8,#E4D8C4);
+    padding:32px; display:flex; align-items:center; justify-content:center;
+  }
+  .swatch-strip{display:flex; gap:8px;}
+  .swatch{width:26px; height:70px; border-radius:4px;}
+  .portfolio-text{padding:36px 34px; display:flex; flex-direction:column; justify-content:center;}
+  .portfolio-text .eyebrow{margin-bottom:10px;}
+  .portfolio-text h3{font-size:22px; margin-bottom:10px;}
+  .portfolio-text p{color:var(--slate); font-size:14.5px; margin-bottom:20px;}
+
+  /* CONTACT */
+  .contact-wrap{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:40px; max-width:600px;
+  }
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--slate);}
+  .field input, .field select, .field textarea{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:6px;
+    font-family:'Inter',sans-serif; font-size:14.5px; background:var(--paper);
+  }
+  .field textarea{resize:vertical; min-height:100px;}
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--teal);
+  }
+  .honeypot{position:absolute; left:-9999px; opacity:0;}
+  .form-note{font-size:12.5px; color:#8A8375; margin-top:10px;}
+
+  footer{
+    border-top:1px solid var(--line); padding:36px 0; margin-top:20px;
+  }
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  footer p{font-size:13px; color:#8A8375;}
+
+  @media (max-width: 760px){
+    .compare{grid-template-columns:1fr;}
+    .compare-arrow{transform:rotate(90deg); padding:6px 0;}
+    .features{grid-template-columns:1fr;}
+    .pricing-wrap{grid-template-columns:1fr;}
+    .portfolio-card{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">code<span>with</span>kv</a>
+    <ul class="navlinks">
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#work">Example</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get a quote</a>
+  </nav>
+</header>
+
+<div id="top" class="wrap hero">
+  <span class="eyebrow">Websites for local businesses</span>
+  <h1>Your customers are searching.<br>Your business isn't <em>showing up.</em></h1>
+  <p class="lede">I build fast, modern one-page websites for local contractors and business owners — the kind of site people expect to find before they ever call you.</p>
+  <div class="hero-ctas">
+    <a href="#pricing" class="btn btn-primary">See pricing</a>
+    <a href="#work" class="btn btn-ghost">See an example</a>
+  </div>
+
+  <div class="compare">
+    <div class="compare-card before">
+      <div class="compare-label">What people find now</div>
+      <div class="nd-mock">
+        <div class="nd-post-head">
+          <div class="nd-avatar"></div>
+          <div>
+            <div class="nd-name">Dana M.</div>
+            <div class="nd-meta">Nextdoor · Port Reading</div>
+          </div>
+        </div>
+        <div class="nd-body">"Does anyone know a reliable painter nearby? Rec's welcome, thanks!"</div>
+        <div class="nd-replies">
+          <div class="nd-reply"><b>Mike T.</b> — try the guy who did our fence, forgot his name</div>
+          <div class="nd-reply"><b>Sarah K.</b> — following, need one too</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-arrow">→</div>
+
+    <div class="compare-card after">
+      <div class="compare-label">What they could find instead</div>
+      <div class="site-mock">
+        <div class="browser-bar">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="browser-url">yourbusiness.com</div>
+        </div>
+        <div class="mini-site">
+          <div class="mini-site-hero">
+            <div class="b">Ferretti Painting Co.</div>
+            <div class="s">Interior &amp; exterior painting, done right.</div>
+            <div class="mini-site-btn">Get a free quote</div>
+          </div>
+          <div class="mini-site-rows">
+            <div></div><div></div><div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap" id="features">
+  <div class="section-head">
+    <h2>What you get</h2>
+    <p>One page, built around your services, with everything a customer needs to decide to call you.</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <div class="num">01</div>
+      <h3>Built for your trade</h3>
+      <p>Not a generic template — a layout and copy pass built around what you actually do and who you do it for.</p>
+    </div>
+    <div class="feature">
+      <div class="num">02</div>
+      <h3>Photos &amp; testimonials</h3>
+      <p>Your best work and your best reviews, front and center — the two things that actually earn a call.</p>
+    </div>
+    <div class="feature">
+      <div class="num">03</div>
+      <h3>A contact form that works</h3>
+      <p>Leads land straight in your inbox. No missed comments, no digging through Nextdoor threads.</p>
+    </div>
+    <div class="feature">
+      <div class="num">04</div>
+      <h3>Fast, secure hosting</h3>
+      <p>Loads instantly, works on any phone, and doesn't go down. Included, not an extra line item.</p>
+    </div>
+    <div class="feature">
+      <div class="num">05</div>
+      <h3>Live in about a week</h3>
+      <p>From a quick call to a live link — no months-long back-and-forth with a big agency.</p>
+    </div>
+    <div class="feature">
+      <div class="num">06</div>
+      <h3>You keep your domain</h3>
+      <p>Your domain name is registered in your name. This is your business, not a rental.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--paper-dim);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Simple, upfront pricing</h2>
+      <p>One build fee to launch, one small monthly fee to keep it online and current. No surprises.</p>
+    </div>
+    <div class="pricing-wrap">
+      <div class="price-card">
+        <span class="price-tag-label">Launch pricing — limited time</span>
+        <div class="price-row">
+          <span class="price-old">$500</span>
+          <span class="price-new">$250</span>
+        </div>
+        <p class="price-sub">One-time — your site, designed and built</p>
+        <ul class="price-list">
+          <li>Custom one-page site for your business</li>
+          <li>Up to 5 photos of your work</li>
+          <li>3 highlighted customer testimonials</li>
+          <li>Contact form wired to your inbox</li>
+          <li>Your domain connected and live</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+
+      <div class="maint-card">
+        <div class="maint-price">$20<span>/month</span></div>
+        <h3>Hosting &amp; maintenance</h3>
+        <ul class="maint-list">
+          <li>Hosting, kept fast and online</li>
+          <li>Small updates — new hours, a new photo, a typo fix</li>
+          <li>Someone to call if anything breaks</li>
+        </ul>
+        <p class="maint-note">Cancel anytime. Your domain stays yours either way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>See it in action</h2>
+      <p>A demo site built for a fictional painting company, using this exact model.</p>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-preview">
+        <div class="swatch-strip">
+          <div class="swatch" style="background:#C9714F;"></div>
+          <div class="swatch" style="background:#7C8B6F;"></div>
+          <div class="swatch" style="background:#3E5C76;"></div>
+          <div class="swatch" style="background:#2E2A26;"></div>
+          <div class="swatch" style="background:#E8DCC8;"></div>
+        </div>
+      </div>
+      <div class="portfolio-text">
+        <span class="eyebrow">Example build</span>
+        <h3>Ferretti Painting Co.</h3>
+        <p>Interior &amp; exterior painting — services, gallery, testimonials, and a contact form, built exactly the way a real client site would be.</p>
+        <a href="painting-demo.html" class="btn btn-ghost">View the demo site →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--paper-dim);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Get a quote</h2>
+      <p>Tell me a bit about your business and I'll follow up with a mockup idea and a firm price.</p>
+    </div>
+    <form class="contact-wrap" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="honeypot">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="business">Type of business</label>
+        <input type="text" id="business" name="business" placeholder="e.g. painting, landscaping, HVAC">
+      </div>
+      <div class="field">
+        <label for="message">What do you need?</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+      <p class="form-note">Sent straight to my inbox. Never posted or shared.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© 2026 CodeWithKV — websites for local businesses.</p>
+    <p><a href="/">codewithkv.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
