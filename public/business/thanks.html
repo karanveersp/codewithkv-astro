@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message sent — CodeWithKV</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161B22;
+    --paper:#F6F3EC;
+    --paper-dim:#EDE8DC;
+    --slate:#5B6472;
+    --amber:#BD7F27;
+    --teal:#1F6F6B;
+    --line:#DDD6C4;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
+
+  header{
+    background:rgba(246,243,236,0.92);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(24px, 6vw, 72px); max-width:1080px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif; font-weight:700; font-size:20px;
+    text-decoration:none;
+  }
+  .logo span{color:var(--amber);}
+
+  main{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    padding:64px clamp(24px, 6vw, 72px);
+  }
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:48px 44px; max-width:520px; text-align:center;
+    box-shadow:0 10px 30px rgba(22,27,34,.06);
+  }
+  .check{
+    width:56px; height:56px; border-radius:50%; margin:0 auto 22px;
+    background:#F0F6F5; color:var(--teal);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; font-weight:700;
+  }
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;
+    font-size:clamp(26px, 4vw, 34px); margin-bottom:14px; line-height:1.15;
+  }
+  .card p{color:var(--slate); font-size:16px; margin-bottom:28px;}
+  .btn{
+    display:inline-block; padding:13px 26px; border-radius:5px;
+    font-weight:600; font-size:15px; text-decoration:none;
+    background:var(--ink); color:var(--paper);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .btn:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(22,27,34,.18);}
+
+  footer{border-top:1px solid var(--line); padding:36px 0;}
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    max-width:1080px; margin:0 auto; padding:0 clamp(24px, 6vw, 72px);
+  }
+  footer p{font-size:13px; color:#8A8375;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/business/" class="logo">code<span>with</span>kv</a>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>Got it — thanks!</h1>
+    <p>Your message is on its way to my inbox. I read every one personally and I'll get back to you within a business day with next steps.</p>
+    <a href="/business/" class="btn">Back to the site</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-row">
+    <p>© 2026 CodeWithKV — websites for local businesses.</p>
+    <p><a href="/">codewithkv.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

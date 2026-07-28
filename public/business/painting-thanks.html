@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request received — Ferretti Painting Co.</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#2A2622;
+    --cream:#F4EEE1;
+    --clay:#C9714F;
+    --sage:#7C8B6F;
+    --slateblue:#3E5C76;
+    --paper:#FBF8F1;
+    --line:#E4DCC8;
+    --grey:#6B6459;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--charcoal);
+    background:var(--paper);
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--slateblue); outline-offset:3px;}
+
+  .swatchbar{display:flex; height:6px;}
+  .swatchbar div{flex:1;}
+
+  header{background:rgba(251,248,241,.94); border-bottom:1px solid var(--line);}
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px clamp(24px, 6vw, 72px); max-width:1100px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px;
+    text-decoration:none; display:flex; align-items:center; gap:10px;
+  }
+  .logo .mark{width:16px; height:16px; background:var(--clay); border-radius:3px;}
+
+  main{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    padding:64px clamp(24px, 6vw, 72px);
+  }
+  .card{
+    background:white; border:1px solid var(--line); border-radius:14px;
+    padding:48px 44px; max-width:520px; text-align:center;
+    box-shadow:0 10px 30px rgba(42,38,34,.08);
+  }
+  .check{
+    width:56px; height:56px; border-radius:50%; margin:0 auto 22px;
+    background:#F3ECDC; color:var(--clay);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; font-weight:700;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;
+    font-size:clamp(26px, 4vw, 34px); margin-bottom:14px; line-height:1.15;
+  }
+  .card p{color:var(--grey); font-size:16px; margin-bottom:28px;}
+  .btn{
+    display:inline-block; padding:13px 24px; border-radius:5px;
+    font-weight:600; font-size:14.5px; text-decoration:none;
+    background:var(--clay); color:white;
+    transition:transform .12s;
+  }
+  .btn:hover{transform:translateY(-1px);}
+
+  footer{border-top:1px solid var(--line); padding:32px 0; margin-top:auto;}
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    font-size:12.5px; color:var(--grey);
+    max-width:1100px; margin:0 auto; padding:0 clamp(24px, 6vw, 72px);
+  }
+  .footer-row a{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="swatchbar">
+  <div style="background:var(--clay);"></div>
+  <div style="background:var(--sage);"></div>
+  <div style="background:var(--slateblue);"></div>
+  <div style="background:var(--charcoal);"></div>
+  <div style="background:#E8DCC8;"></div>
+</div>
+
+<header>
+  <nav>
+    <a href="/business/painting-demo.html" class="logo"><span class="mark"></span>Ferretti Painting Co.</a>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>Request received!</h1>
+    <p>Thanks for reaching out — we'll review your project details and get back to you within one business day to schedule your free estimate.</p>
+    <a href="/business/painting-demo.html" class="btn">Back to the site</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-row">
+    <p>© 2026 Ferretti Painting Co. — this is a demo site.</p>
+    <p>Site by <a href="/business/">CodeWithKV</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
