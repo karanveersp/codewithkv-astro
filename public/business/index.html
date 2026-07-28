@@ -35,7 +35,7 @@
   }
   a{color:inherit;}
   img{max-width:100%; display:block;}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 clamp(24px, 6vw, 72px);}
+  .wrap{max-width:1080px; margin:0 auto; padding-left:clamp(24px, 6vw, 72px); padding-right:clamp(24px, 6vw, 72px);}
   :focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
 
   /* NAV */
@@ -67,7 +67,7 @@
   }
 
   /* HERO */
-  .hero{padding:88px 0 64px;}
+  .hero{padding-top:88px; padding-bottom:64px;}
   .eyebrow{
     font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
     color:var(--teal); margin-bottom:18px; display:block;
@@ -233,7 +233,7 @@
   .field{margin-bottom:18px;}
   .field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--slate);}
   .field input, .field select, .field textarea{
-    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:6px;
+    width:100%; padding:11px 18px; border:1.5px solid var(--line); border-radius:6px;
     font-family:'Inter',sans-serif; font-size:14.5px; background:var(--paper);
   }
   .field textarea{resize:vertical; min-height:100px;}
@@ -256,6 +256,22 @@
     .pricing-wrap{grid-template-columns:1fr;}
     .portfolio-card{grid-template-columns:1fr;}
     .navlinks{display:none;}
+
+    nav{padding:14px 24px; gap:12px;}
+    .nav-cta{white-space:nowrap; flex-shrink:0;}
+
+    .hero{padding-top:48px; padding-bottom:40px;}
+    .hero-ctas{margin-bottom:44px;}
+    section{padding:52px 0;}
+    .section-head{margin-bottom:32px;}
+    .price-card{padding:32px 26px;}
+    .maint-card{padding:28px 24px;}
+    .portfolio-text{padding:28px 24px;}
+    .portfolio-preview{padding:24px;}
+
+    /* 16px+ inputs stop iOS Safari from auto-zooming on focus */
+    .field input, .field select, .field textarea{font-size:16px;}
+    .contact-wrap{padding:28px 22px;}
   }
 </style>
 </head>
