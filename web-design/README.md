@@ -50,7 +50,7 @@ you only touch that block.
       dashboard entry AND the notification email (spam-flagged
       submissions send no email — check the spam tab if missing)
 - [ ] Check the live site on a real phone, cellular connection
-- [ ] Update maintenance tracker: client is now on the $20/mo plan
+- [ ] Update maintenance tracker: client is now on the $35/mo plan
 
 ## Rules baked into the template
 
