@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request received — {{BUSINESS_NAME}}</title>
+<meta name="robots" content="noindex">
+
+<!-- Keep fonts + theme block identical to index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="site.css">
+
+<style>
+  :root{
+    --ink:#2A2622;
+    --paper:#FBF8F1;
+    --paper-translucent:rgba(251,248,241,.94);
+    --surface:#F3ECDC;
+    --card:#FFFFFF;
+    --line:#E4DCC8;
+    --muted:#6B6459;
+    --muted-on-dark:#C9C2B2;
+    --shadow:rgba(42,38,34,.15);
+
+    --primary:#C9714F;
+    --secondary:#7C8B6F;
+    --accent:#3E5C76;
+
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+</style>
+</head>
+<body class="thanks-body">
+
+<div class="swatchbar">
+  <div style="background:var(--primary);"></div>
+  <div style="background:var(--secondary);"></div>
+  <div style="background:var(--accent);"></div>
+  <div style="background:var(--ink);"></div>
+  <div style="background:var(--line);"></div>
+</div>
+
+<header>
+  <nav>
+    <a href="/" class="logo"><span class="mark"></span>{{BUSINESS_NAME}}</a>
+  </nav>
+</header>
+
+<main class="thanks-main">
+  <div class="thanks-card">
+    <div class="thanks-check">✓</div>
+    <h1>Request received!</h1>
+    <p>Thanks for reaching out — we'll review your details and get back to you within one business day.</p>
+    <a href="/" class="btn btn-primary">Back to the site</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</p>
+    <p>Site by <a href="https://codewithkv.com/business/">CodeWithKV</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
