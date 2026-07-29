@@ -49,8 +49,10 @@ you only touch that block.
 - [ ] Submit a realistic test through the live form; confirm the
       dashboard entry AND the notification email (spam-flagged
       submissions send no email — check the spam tab if missing)
+- [ ] Validate the structured data on the live URL:
+      https://search.google.com/test/rich-results
 - [ ] Check the live site on a real phone, cellular connection
-- [ ] Update maintenance tracker: client is now on the $20/mo plan
+- [ ] Update maintenance tracker: client is now on the $35/mo plan
 
 ## Rules baked into the template
 

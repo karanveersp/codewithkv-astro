@@ -19,6 +19,36 @@
 <link rel="stylesheet" href="site.css">
 
 <!-- ============================================================
+     STRUCTURED DATA — machine-readable business facts for search
+     engines and AI assistants. Invisible to visitors.
+     - {{SCHEMA_BUSINESS_TYPE}}: pick the closest schema.org type:
+       HousePainter, RoofingContractor, Plumber, Electrician,
+       HVACBusiness, GeneralContractor, Locksmith, MovingCompany.
+       Fallback if none fit: LocalBusiness
+     - {{HOURS_SCHEMA}} format: "Mo-Sa 07:00-18:00"
+     - sameAs: the business's other profiles (Google Business
+       Profile, Facebook, Yelp...). Delete lines that don't exist.
+     - Validate after deploy: https://search.google.com/test/rich-results
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{SCHEMA_BUSINESS_TYPE}}",
+  "name": "{{BUSINESS_NAME}}",
+  "description": "{{ONE_LINE_PITCH}}",
+  "url": "{{SITE_URL}}",
+  "telephone": "{{PHONE}}",
+  "image": "{{SITE_URL}}/img/hero.jpg",
+  "areaServed": "{{SERVICE_AREA}}",
+  "openingHours": "{{HOURS_SCHEMA}}",
+  "sameAs": [
+    "{{GOOGLE_BUSINESS_PROFILE_URL}}",
+    "{{FACEBOOK_URL}}"
+  ]
+}
+</script>
+
+<!-- ============================================================
      THEME — the only CSS that changes per client.
      Pick 3 brand colors (primary / secondary / accent) plus an
      ink + paper pair, and derive the rest.
