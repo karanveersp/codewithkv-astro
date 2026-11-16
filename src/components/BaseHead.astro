@@ -1,8 +1,6 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-
-import "@picocss/pico";
+// Global styles for every page. Pico is imported inside global.css,
+// in its own cascade layer.
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/jetbrains-mono";
@@ -38,7 +36,6 @@ const { title, description } = Astro.props;
                 : "light";
         }
         document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.classList.add(theme);
     })();
 </script>
 <link

@@ -9,23 +9,22 @@
 
 <style>
     #themeToggle {
-        border: none;
-        background: none;
-        padding: 0;
-        --pico-box-shadow: none;
-        transition: transform 0.4s ease;
-        --icon-color-light: var(--kv-muted);
-        --icon-color-dark: var(--kv-muted);
-        cursor: pointer;
-        line-height: 1;
         display: inline-flex;
         align-items: center;
         margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        box-shadow: none;
+        color: var(--kv-muted);
+        line-height: 1;
         vertical-align: middle;
+        cursor: pointer;
+        transition: color var(--kv-transition);
     }
 
     #themeToggle:hover {
-        color: var(--pico-primary-hover);
+        color: var(--kv-accent);
     }
 
     .bx {
@@ -34,25 +33,11 @@
     }
 
     #sunIcon {
-        color: var(--icon-color-light);
+        display: var(--kv-show-in-light);
     }
 
     #moonIcon {
-        display: none; /* Default hidden */
-        color: var(--icon-color-dark);
-    }
-
-    #themeToggle:hover #moonIcon,
-    #themeToggle:hover #sunIcon {
-        color: var(--pico-primary-hover);
-    }
-
-    :global(.dark) #sunIcon {
-        display: none;
-    }
-
-    :global(.dark) #moonIcon {
-        display: inline-block;
+        display: var(--kv-show-in-dark);
     }
 </style>
 
@@ -61,10 +46,6 @@ const setTheme = () => {
     function enableTheme(value) {
         const element = document.documentElement;
         element.setAttribute("data-theme", value);
-        document.documentElement.classList.add(value);
-        document.documentElement.classList.remove(
-            value === "dark" ? "light" : "dark",
-        );
         localStorage.setItem("theme", value);
     }
     const themeToggle = document.getElementById("themeToggle");

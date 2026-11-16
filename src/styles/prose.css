@@ -1,0 +1,59 @@
+/* Rendered markdown inside a post (.prose). Links are styled by .kv-mark. */
+
+.prose {
+    font-size: var(--kv-text-lg);
+    line-height: 1.75;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+    max-width: 68ch;
+}
+
+.prose h2 {
+    font-size: var(--kv-text-2xl);
+    margin-top: 2.5rem;
+}
+
+.prose h3 {
+    font-size: var(--kv-text-xl);
+    margin-top: 2rem;
+}
+
+/* "#" link appended to headings by rehype-autolink-headings. */
+.heading-anchor {
+    margin-left: 0.4em;
+    font-family: var(--kv-font-mono);
+    font-weight: 400;
+    color: var(--kv-muted);
+    opacity: 0;
+    transition: opacity var(--kv-transition);
+}
+
+.prose :is(h2, h3, h4):hover .heading-anchor,
+.heading-anchor:focus-visible {
+    opacity: 1;
+    color: var(--kv-accent);
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+}
+
+.prose blockquote {
+    margin: 1.5rem 0;
+    padding: 0.75rem 1.25rem;
+    border-left: 3px solid var(--kv-accent-fill);
+    background: var(--kv-surface);
+    color: var(--kv-text);
+}
+
+@media (max-width: 768px) {
+    .prose {
+        font-size: 1.05rem;
+    }
+}

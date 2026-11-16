@@ -11,7 +11,7 @@ const { tags, counts } = Astro.props;
     {
         [...tags].sort().map((tag) => (
             <li>
-                <a href={`/tags/${tag}`} class="tag">
+                <a href={`/tags/${tag}`} class="tag kv-notch">
                     <span class="hash">#</span>
                     {tag}
                     {counts?.[tag] !== undefined && (
@@ -48,15 +48,9 @@ const { tags, counts } = Astro.props;
         background: var(--kv-surface);
         color: var(--kv-muted);
         font-family: var(--kv-font-mono);
-        font-size: 0.75rem;
+        font-size: var(--kv-text-xs);
         line-height: 1.5;
-        clip-path: polygon(
-            0 0,
-            calc(100% - 6px) 0,
-            100% 6px,
-            100% 100%,
-            0 100%
-        );
+        --notch: 6px;
         transition:
             color var(--kv-transition),
             border-color var(--kv-transition),

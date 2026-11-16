@@ -1,0 +1,43 @@
+/*
+  Points Pico's variables at our tokens, so Pico's element styles (tables,
+  forms, typography) use the site theme.
+
+  Pico is imported into the `pico` cascade layer (see global.css), so these
+  unlayered rules always win, whatever selectors Pico uses for its themes.
+*/
+
+:root {
+    --pico-font-family: var(--kv-font-body);
+    --pico-font-family-sans-serif: var(--kv-font-body);
+    --pico-font-family-monospace: var(--kv-font-mono);
+    --pico-border-radius: var(--kv-radius);
+
+    --pico-background-color: var(--kv-bg);
+    --pico-color: var(--kv-text);
+    --pico-h1-color: var(--kv-heading);
+    --pico-h2-color: var(--kv-heading);
+    --pico-h3-color: var(--kv-heading);
+    --pico-h4-color: var(--kv-heading);
+    --pico-h5-color: var(--kv-heading);
+    --pico-h6-color: var(--kv-muted);
+    --pico-muted-color: var(--kv-muted);
+    --pico-muted-border-color: var(--kv-border);
+
+    --pico-primary: var(--kv-accent);
+    --pico-primary-hover: var(--kv-accent-hover);
+    --pico-primary-underline: var(--kv-accent-soft);
+    --pico-primary-focus: var(--kv-accent-soft);
+    --pico-secondary: var(--kv-muted);
+    --pico-secondary-hover: var(--kv-accent);
+    --pico-text-selection-color: var(--kv-accent-soft);
+
+    --pico-card-background-color: var(--kv-surface);
+    --pico-card-sectioning-background-color: var(--kv-surface-2);
+    --pico-card-box-shadow: none;
+    --pico-code-background-color: var(--kv-surface-2);
+    --pico-code-color: var(--kv-cyan);
+    --pico-mark-background-color: var(--kv-accent-fill);
+    --pico-mark-color: var(--kv-accent-ink);
+    --pico-blockquote-border-color: var(--kv-accent-fill);
+    --pico-table-border-color: var(--kv-border);
+}
