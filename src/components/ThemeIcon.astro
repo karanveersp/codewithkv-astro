@@ -2,9 +2,9 @@
 
 ---
 
-<button id="themeToggle">
-    <i id="sunIcon" class="bx bx-sun bx-sm"></i>
-    <i id="moonIcon" class="bx bxs-moon bx-sm"></i>
+<button id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+    <i id="sunIcon" class="bx bx-sun"></i>
+    <i id="moonIcon" class="bx bxs-moon"></i>
 </button>
 
 <style>
@@ -14,8 +14,14 @@
         padding: 0;
         --pico-box-shadow: none;
         transition: transform 0.4s ease;
-        --icon-color-light: #373c44;
-        --icon-color-dark: #969eaf;
+        --icon-color-light: var(--kv-muted);
+        --icon-color-dark: var(--kv-muted);
+        cursor: pointer;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        margin: 0;
+        vertical-align: middle;
     }
 
     #themeToggle:hover {
@@ -23,8 +29,8 @@
     }
 
     .bx {
-        width: 32px;
-        height: 32px;
+        font-size: 20px;
+        vertical-align: middle;
     }
 
     #sunIcon {
@@ -91,7 +97,6 @@ const setTheme = () => {
         } else {
             enableTheme("light");
         }
-        console.log("fired");
     });
 };
 

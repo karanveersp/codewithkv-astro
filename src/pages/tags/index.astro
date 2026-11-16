@@ -2,25 +2,28 @@
 import TagsList from "../../components/TagsList.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+
 const posts = (await getCollection("blog")).filter((p) => !p.data.draft);
-const tags = [...new Set(posts.map((post) => post.data.tags).flat())].sort();
+const counts: Record<string, number> = {};
+for (const tag of posts.flatMap((post) => post.data.tags)) {
+    counts[tag] = (counts[tag] ?? 0) + 1;
+}
+const tags = Object.keys(counts);
 ---
 
 <BaseLayout title="Tags" description="All tags">
-    <article>
-        <head>
-            <h1>Tags</h1>
-        </head>
-        <TagsList tags={tags} />
-    </article>
+    <header class="page-title">
+        <p class="kv-label">index</p>
+        <h1>Tags</h1>
+    </header>
+    <div class="all-tags">
+        <TagsList tags={tags} counts={counts} />
+    </div>
 </BaseLayout>
 
 <style>
-    article {
-        text-align: center;
-    }
-    .tagLink {
-        display: inline-block;
-        margin-left: 1em;
+    .all-tags :global(.tag) {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.75rem;
     }
 </style>

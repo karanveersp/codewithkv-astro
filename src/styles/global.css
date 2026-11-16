@@ -1,224 +1,484 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-/* Orange color for light color scheme (Default) */
-/* Can be forced with data-theme="light" */
+  Code with KV — global theme.
+  Layered over Pico CSS: our own tokens (--kv-*) drive Pico's variables, so
+  Pico's element styles pick up the yellow-on-dark look automatically.
+*/
+
+/* ---------- Tokens ---------- */
 
 :root {
-    --transition-speed: 0.3s;
-    transition:
-        background-color var(--transition-speed) ease,
-        color var(--transition-speed) ease;
+    --kv-font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI",
+        sans-serif;
+    --kv-font-display: "Space Grotesk Variable", "Inter Variable", system-ui,
+        sans-serif;
+    --kv-font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
+        Menlo, Consolas, monospace;
+
+    --kv-content-width: 46rem;
+    --kv-wide-width: 66rem;
+    --kv-radius: 4px;
+    /* Clipped corner used on chips, cards and code blocks. */
+    --kv-notch: 10px;
+    --kv-transition: 0.2s ease;
 }
 
-[data-theme="light"],
-:root:not([data-theme="dark"]) {
-    --pico-text-selection-color: rgba(244, 93, 44, 0.25);
-    --pico-primary: #bd3c13;
-    --pico-primary-background: #d24317;
-    --pico-primary-underline: rgba(189, 60, 19, 0.5);
-    --pico-primary-hover: #942d0d;
-    --pico-primary-hover-background: #bd3c13;
-    --pico-primary-focus: rgba(244, 93, 44, 0.25);
-    --pico-primary-inverse: #fff;
+/* Light: warm paper with a darker amber so yellow stays readable as text. */
+:root:not([data-theme="dark"]),
+[data-theme="light"] {
+    --kv-bg: #f6f5ef;
+    --kv-surface: #ffffff;
+    --kv-surface-2: #efede4;
+    --kv-border: #dcd9cc;
+    --kv-text: #1c1e23;
+    --kv-heading: #0f1114;
+    --kv-muted: #5c616d;
+    --kv-accent: #c80815; /* Venetian red: links and accent text */
+    --kv-accent-hover: #960610;
+    --kv-accent-fill: #f5d90a; /* highlight fills */
+    --kv-logo: var(--kv-accent); /* bright yellow disappears on the light background */
+    --kv-accent-ink: #14140f; /* text on top of accent fill */
+    --kv-accent-soft: rgba(245, 217, 10, 0.28);
+    --kv-cyan: #00707a;
+    --kv-glow: none;
+    --kv-grid: rgba(20, 20, 15, 0.045);
 }
 
+/* Dark: near-black with neon yellow. */
 @media only screen and (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-        --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
-        --pico-primary: #f56b3d;
-        --pico-primary-background: #d24317;
-        --pico-primary-underline: rgba(245, 107, 61, 0.5);
-        --pico-primary-hover: #f8a283;
-        --pico-primary-hover-background: #e74b1a;
-        --pico-primary-focus: rgba(245, 107, 61, 0.25);
-        --pico-primary-inverse: #fff;
+        --kv-bg: #0a0b0e;
+        --kv-surface: #111318;
+        --kv-surface-2: #171a21;
+        --kv-border: #262a33;
+        --kv-text: #d3d8e0;
+        --kv-heading: #f3f4f6;
+        --kv-muted: #8b93a3;
+        --kv-accent: #f8e71c;
+        --kv-accent-hover: #fff27a;
+        --kv-accent-fill: #f8e71c;
+        --kv-logo: #f8e71c;
+        --kv-accent-ink: #0a0b0e;
+        --kv-accent-soft: rgba(248, 231, 28, 0.14);
+        --kv-cyan: #3fe0e8;
+        --kv-glow: 0 0 18px rgba(248, 231, 28, 0.35);
+        --kv-grid: rgba(248, 231, 28, 0.035);
     }
 }
 
 [data-theme="dark"] {
-    --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
-    --pico-primary: #f56b3d;
-    --pico-primary-background: #d24317;
-    --pico-primary-underline: rgba(245, 107, 61, 0.5);
-    --pico-primary-hover: #f8a283;
-    --pico-primary-hover-background: #e74b1a;
-    --pico-primary-focus: rgba(245, 107, 61, 0.25);
-    --pico-primary-inverse: #fff;
+    --kv-bg: #0a0b0e;
+    --kv-surface: #111318;
+    --kv-surface-2: #171a21;
+    --kv-border: #262a33;
+    --kv-text: #d3d8e0;
+    --kv-heading: #f3f4f6;
+    --kv-muted: #8b93a3;
+    --kv-accent: #f8e71c;
+    --kv-accent-hover: #fff27a;
+    --kv-accent-fill: #f8e71c;
+    --kv-logo: #f8e71c;
+    --kv-accent-ink: #0a0b0e;
+    --kv-accent-soft: rgba(248, 231, 28, 0.14);
+    --kv-cyan: #3fe0e8;
+    --kv-glow: 0 0 18px rgba(248, 231, 28, 0.35);
+    --kv-grid: rgba(248, 231, 28, 0.035);
 }
 
-hr {
-    transition: border-top var(--transition-speed) ease;
+/* ---------- Map tokens onto Pico ---------- */
+
+:root:not([data-theme="dark"]),
+[data-theme="light"],
+[data-theme="dark"] {
+    --pico-font-family: var(--kv-font-body);
+    --pico-font-family-sans-serif: var(--kv-font-body);
+    --pico-font-family-monospace: var(--kv-font-mono);
+    --pico-border-radius: var(--kv-radius);
+    --pico-background-color: var(--kv-bg);
+    --pico-color: var(--kv-text);
+    --pico-h1-color: var(--kv-heading);
+    --pico-h2-color: var(--kv-heading);
+    --pico-h3-color: var(--kv-heading);
+    --pico-h4-color: var(--kv-heading);
+    --pico-h5-color: var(--kv-heading);
+    --pico-h6-color: var(--kv-muted);
+    --pico-muted-color: var(--kv-muted);
+    --pico-muted-border-color: var(--kv-border);
+    --pico-card-background-color: var(--kv-surface);
+    --pico-card-sectioning-background-color: var(--kv-surface-2);
+    --pico-card-box-shadow: none;
+    --pico-primary: var(--kv-accent);
+    --pico-primary-hover: var(--kv-accent-hover);
+    --pico-primary-underline: var(--kv-accent-soft);
+    --pico-primary-focus: var(--kv-accent-soft);
+    --pico-secondary: var(--kv-muted);
+    --pico-secondary-hover: var(--kv-accent);
+    --pico-code-background-color: var(--kv-surface-2);
+    --pico-code-color: var(--kv-cyan);
+    --pico-mark-background-color: var(--kv-accent-fill);
+    --pico-mark-color: var(--kv-accent-ink);
+    --pico-blockquote-border-color: var(--kv-accent-fill);
+    --pico-table-border-color: var(--kv-border);
+    --pico-text-selection-color: var(--kv-accent-soft);
 }
 
-article {
-    transition: background var(--transition-speed) ease;
-    padding: 2em;
-    margin-bottom: 1em;
+@media only screen and (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --pico-background-color: var(--kv-bg);
+        --pico-color: var(--kv-text);
+        --pico-h1-color: var(--kv-heading);
+        --pico-h2-color: var(--kv-heading);
+        --pico-h3-color: var(--kv-heading);
+        --pico-h4-color: var(--kv-heading);
+        --pico-h5-color: var(--kv-heading);
+        --pico-muted-color: var(--kv-muted);
+        --pico-muted-border-color: var(--kv-border);
+        --pico-card-background-color: var(--kv-surface);
+        --pico-primary: var(--kv-accent);
+        --pico-primary-hover: var(--kv-accent-hover);
+        --pico-code-background-color: var(--kv-surface-2);
+        --pico-code-color: var(--kv-cyan);
+    }
 }
 
-code {
-    transition: background var(--transition-speed) ease !important;
-    transition: color var(--transition-speed) ease;
-}
+/* ---------- Base ---------- */
 
-/* Always show scrollbar */
 html {
     overflow-y: scroll;
+    scroll-padding-top: 1.5rem;
 }
 
-/* Removing underlines when hovering */
-a,
-a:hover,
-#siteTitleHeading,
-nav a:active,
-a:hover h3 {
-    text-decoration: none;
-}
-
-/* Hover for all other links */
-a:hover {
-    color: var(--pico-primary-hover);
-}
-
-/* Hover color for blog headings and site title */
-a:hover #siteTitleHeading,
-a:hover h3 {
-    color: var(--pico-primary);
-}
-
-#siteTitleHeading {
-    color: var(--pico-h1-color);
-    margin: 0;
-    padding: 0;
-    transition: color var(--transition-speed) ease;
-}
-
-body main {
-    padding: 2em 1rem 0;
-    margin: 0 auto;
-    max-width: 48rem;
-}
-
-@media (max-width: 768px) {
-    body {
-        font-size: 18px;
-    }
-    article {
-        padding: 0.5em;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-/* 
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
 body {
-	font-family: 'Atkinson', sans-serif;
+    background-color: var(--kv-bg);
+    /* Faint grid behind everything. */
+    background-image:
+        linear-gradient(var(--kv-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--kv-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-attachment: fixed;
+    font-size: 1.0625rem;
+    transition:
+        background-color var(--kv-transition),
+        color var(--kv-transition);
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-} */
-/* h1,
+
+body > main {
+    width: 100%;
+    max-width: var(--kv-content-width);
+    margin: 0 auto;
+    padding: 2rem 1rem 0;
+}
+
+h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
-	color: var(--h1-color)
-} */
-/*
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
 h5 {
-	font-size: 1.25em;
+    font-family: var(--kv-font-display);
+    font-weight: 650;
+    letter-spacing: -0.02em;
 }
-strong,
-b {
-	font-weight: 700;
-}
+
 a {
-	color: var(--accent);
+    color: var(--kv-accent);
+    text-decoration: none;
+    transition: color var(--kv-transition);
 }
+
 a:hover {
-	color: var(--accent);
+    color: var(--kv-accent-hover);
 }
-p {
-	margin-bottom: 1em;
+
+::selection {
+    background: var(--kv-accent-soft);
 }
-.prose p {
-	margin-bottom: 2em;
+
+:focus-visible {
+    outline: 2px solid var(--kv-accent-fill);
+    outline-offset: 2px;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
+
 hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+    border: none;
+    border-top: 1px solid var(--kv-border);
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-} */
+
+/* Small monospace label, e.g. "// latest posts". */
+.kv-label {
+    font-family: var(--kv-font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--kv-muted);
+}
+
+.kv-label::before {
+    content: "// ";
+    color: var(--kv-accent);
+}
+
+/* Page title used on About, Projects, Tags. */
+.page-title {
+    margin-bottom: 2rem;
+}
+
+.page-title h1 {
+    margin: 0.25rem 0 0;
+    font-size: 2.25rem;
+}
+
+/* Pico wraps <article> in a card; keep it flat and quiet. */
+article {
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* ---------- Prose (post body) ---------- */
+
+.prose {
+    font-size: 1.1rem;
+    line-height: 1.75;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+    max-width: 68ch;
+}
+
+.prose h2 {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+}
+
+.prose h3 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+    position: relative;
+}
+
+.prose a:not(.heading-anchor) {
+    text-decoration: underline;
+    text-decoration-color: var(--kv-accent-soft);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.prose a:not(.heading-anchor):hover {
+    text-decoration-color: var(--kv-accent);
+}
+
+/* Light mode: links match the post titles. Dark text with a yellow marker
+   stroke that fills in behind the whole link on hover. */
+:root:not([data-theme="dark"]) .prose a:not(.heading-anchor) {
+    padding: 0 0.1em;
+    margin: 0 -0.1em;
+    color: var(--kv-heading);
+    text-decoration: none;
+    background-image: linear-gradient(
+        var(--kv-accent-fill),
+        var(--kv-accent-fill)
+    );
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.35em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition:
+        background-size 0.25s ease,
+        color var(--kv-transition);
+}
+
+:root:not([data-theme="dark"]) .prose a:not(.heading-anchor):hover {
+    color: var(--kv-accent-ink);
+    background-size: 100% 100%;
+}
+
+.heading-anchor {
+    margin-left: 0.4em;
+    font-family: var(--kv-font-mono);
+    font-weight: 400;
+    color: var(--kv-muted);
+    opacity: 0;
+    transition: opacity var(--kv-transition);
+}
+
+.prose :is(h2, h3, h4):hover .heading-anchor,
+.heading-anchor:focus-visible {
+    opacity: 1;
+    color: var(--kv-accent);
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+}
+
+.prose blockquote {
+    margin: 1.5rem 0;
+    padding: 0.75rem 1.25rem;
+    border-left: 3px solid var(--kv-accent-fill);
+    background: var(--kv-surface);
+    color: var(--kv-text);
+}
+
+/* Inline code */
+:not(pre) > code {
+    font-family: var(--kv-font-mono);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+    background: var(--kv-surface-2);
+    color: var(--kv-cyan);
+}
+
+/* ---------- Code blocks ---------- */
+
+.code-block {
+    margin: 1.75rem 0;
+    border: 1px solid var(--kv-border);
+    background: var(--kv-surface);
+    clip-path: polygon(
+        0 0,
+        calc(100% - var(--kv-notch)) 0,
+        100% var(--kv-notch),
+        100% 100%,
+        0 100%
+    );
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.35rem 0.6rem 0.35rem 1rem;
+    border-bottom: 1px solid var(--kv-border);
+    background: var(--kv-surface-2);
+    font-family: var(--kv-font-mono);
+    font-size: 0.75rem;
+    text-transform: lowercase;
+}
+
+.code-lang {
+    color: var(--kv-accent);
+    letter-spacing: 0.05em;
+}
+
+.code-copy {
+    all: unset;
+    cursor: pointer;
+    padding: 0.15rem 0.6rem;
+    margin-right: 0.4rem;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+    color: var(--kv-muted);
+    transition:
+        color var(--kv-transition),
+        border-color var(--kv-transition);
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+    color: var(--kv-accent);
+    border-color: var(--kv-accent);
+}
+
+.code-copy[data-copied] {
+    color: var(--kv-accent-ink);
+    background: var(--kv-accent-fill);
+    border-color: var(--kv-accent-fill);
+}
+
+pre.astro-code {
+    margin: 0;
+    padding: 1rem 0;
+    border-radius: 0;
+    background: transparent !important;
+    font-family: var(--kv-font-mono);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    overflow-x: auto;
+    /* Show == and => as typed, which matters in tutorials. */
+    font-variant-ligatures: none;
+}
+
+pre.astro-code code {
+    display: block;
+    min-width: fit-content;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
+pre.astro-code .line {
+    display: inline-block;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/* Dual Shiki themes: choose the token colors that match the site theme. */
+:root:not([data-theme="dark"]) .astro-code span {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+}
+
+[data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style);
+    font-weight: var(--shiki-dark-font-weight);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .astro-code span {
+        color: var(--shiki-dark);
+        font-style: var(--shiki-dark-font-style);
+        font-weight: var(--shiki-dark-font-weight);
+    }
+}
+
+/* Line highlighting from {2,4-5} meta or // [!code highlight] */
+pre.astro-code .line.highlighted {
+    background: var(--kv-accent-soft);
+    box-shadow: inset 3px 0 0 var(--kv-accent-fill);
+}
+
+pre.astro-code .line.diff.add {
+    background: rgba(46, 160, 67, 0.15);
+    box-shadow: inset 3px 0 0 #2ea043;
+}
+
+pre.astro-code .line.diff.remove {
+    background: rgba(248, 81, 73, 0.15);
+    box-shadow: inset 3px 0 0 #f85149;
+    opacity: 0.75;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+    }
+    .prose {
+        font-size: 1.05rem;
+    }
+    .page-title h1 {
+        font-size: 1.85rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

@@ -8,8 +8,7 @@ import BlogPostItem from "../components/BlogPostItem.astro";
 
 const posts = (await getCollection("blog"))
     .filter((p) => !p.data.draft)
-    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
-    .reverse();
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <!doctype html>
@@ -18,12 +17,52 @@ const posts = (await getCollection("blog"))
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
     <body>
-        <Header title={SITE_TITLE} />
+        <Header />
         <main>
-            <section>
+            <section class="intro">
+                <p class="kv-label">hello, world</p>
+                <h1>
+                    I'm KV. I like to build things with
+                    <span class="hl">code</span> and share what I learn.
+                </h1>
+                <p class="bio">
+                    Notes on Python, Go, F#, functional programming, desktop
+                    apps and web development. Written to explore, organize and
+                    share ideas.
+                </p>
+            </section>
+
+            <section class="posts">
+                <p class="kv-label">latest posts</p>
                 {posts.map((post) => <BlogPostItem post={post} />)}
             </section>
         </main>
         <Footer />
     </body>
 </html>
+
+<style>
+    .intro {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .intro h1 {
+        margin: 0.75rem 0 1rem;
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.1;
+    }
+
+    .hl {
+        padding: 0 0.15em;
+        color: var(--kv-accent-ink);
+        background: var(--kv-accent-fill);
+        box-shadow: var(--kv-glow);
+    }
+
+    .bio {
+        max-width: 38rem;
+        margin: 0;
+        color: var(--kv-muted);
+        font-size: 1.1rem;
+    }
+</style>

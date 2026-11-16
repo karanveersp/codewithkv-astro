@@ -1,85 +1,157 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    name: "iDraw",
+    href: "https://idrawgestures.com/",
+    stack: ["Go", "Fyne"],
+    description:
+      "A professional desktop app for artists to practice timed drawing from local images. Available now on the Microsoft Store!",
+  },
+  {
+    name: "CypherFS",
+    href: "https://github.com/karanveersp/CypherFS",
+    stack: ["F#", "CLI"],
+    description:
+      "An F# CLI app to AES encrypt/decrypt text data. Useful for storing passwords and secrets, which can be backed up and shared securely.",
+  },
+  {
+    name: "CmdRef dotnet tool",
+    href: "https://github.com/karanveersp/dotnet-cmdref",
+    stack: ["F#", ".NET"],
+    description:
+      "A dotnet tool to serve as a command reference store. Useful for collecting long or complicated commands that are difficult to remember (looking at you Docker!).",
+    extra: {
+      label: "Install from NuGet",
+      href: "https://www.nuget.org/packages/dotnet-cmdref/",
+    },
+  },
+  {
+    name: "Cryptocurrency Price Forecaster",
+    href: "https://github.com/karanveersp/Capstone",
+    stack: ["C#", "ML.NET", "Avalonia"],
+    description:
+      "A desktop app to analyze and forecast cryptocurrency prices using machine learning.",
+  },
+  {
+    name: "Simple File Logger",
+    href: "https://github.com/karanveersp/simple-file-logger",
+    stack: ["Python"],
+    description:
+      "A Python library providing an easy to use class for logging to files with opinionated defaults that can be customized.",
+  },
+];
 ---
 
 <BaseLayout title="Projects" description="My personal projects">
-  <ul>
-    <li>
-      <div>
-        <span>
-          <a href="https://idrawgestures.com/">iDraw</a>
-        </span>
-        <p>
-          A professional desktop app for artists to practice timed drawing from
-          local images.
-          <br />
-          Available now on the Microsoft Store!
-          <br />
-          Built with Go, and the Fyne desktop app UI framework.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <span>
-          <a href="https://github.com/karanveersp/CypherFS">CypherFS</a>
-        </span>
-        <p>
-          An F# CLI app to AES encrypt/decrypt text data.
-          <br />
-          Useful for storing passwords, and secrets, which can be backed up and shared
-          securely.
-        </p>
-      </div>
-    </li>
+  <header class="page-title">
+    <p class="kv-label">ls ~/projects</p>
+    <h1>Projects</h1>
+  </header>
 
-    <li>
-      <div>
-        <span>
-          <a href="https://github.com/karanveersp/dotnet-cmdref"
-            >CmdRef dotnet tool</a
-          >
-        </span>
-        <p>
-          A dotnet tool implemented in F# to serve as a command reference store.
-          <br />
-          Useful for collecting long or complicated commands that are difficult to
-          remember (looking at you Docker!). You can find this tool and the installation
-          commands on <a href="https://www.nuget.org/packages/dotnet-cmdref/"
-            >NuGet</a
-          >.
-        </p>
-      </div>
-    </li>
-
-    <li>
-      <div>
-        <span>
-          <a href="https://github.com/karanveersp/Capstone">
-            Cryptocurrency Price Forecaster
-          </a>
-        </span>
-        <p>
-          A desktop app to analyze and forecast cryptocurrency prices using
-          machine learning.
-          <br />
-          Built with C#, ML.NET and Avalonia.
-        </p>
-      </div>
-    </li>
-
-    <li>
-      <div>
-        <span>
-          <a href="https://github.com/karanveersp/simple-file-logger">
-            Simple File Logger
-          </a>
-        </span>
-        <p>
-          A Python library providing an easy to use class for logging to files
-          with opinionated defaults that can be customized.
-        </p>
-      </div>
-    </li>
+  <ul class="projects">
+    {
+      projects.map((p) => (
+        <li class="project">
+          <h2>
+            <a href={p.href} target="_blank" rel="noopener">
+              {p.name}
+              <span class="arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </h2>
+          <p>{p.description}</p>
+          {p.extra && (
+            <p>
+              <a href={p.extra.href} target="_blank" rel="noopener">
+                {p.extra.label}
+              </a>
+            </p>
+          )}
+          <ul class="stack">
+            {p.stack.map((s) => (
+              <li>{s}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>
+
+<style>
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 1.25rem 1.25rem 1rem;
+    list-style: none;
+    border: 1px solid var(--kv-border);
+    background: var(--kv-surface);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 14px) 0,
+      100% 14px,
+      100% 100%,
+      0 100%
+    );
+    transition: border-color var(--kv-transition);
+  }
+
+  .project:hover {
+    border-color: var(--kv-accent);
+  }
+
+  .project h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  .project h2 a {
+    color: var(--kv-heading);
+  }
+
+  .project h2 a:hover,
+  .project:hover .arrow {
+    color: var(--kv-accent);
+  }
+
+  .arrow {
+    color: var(--kv-muted);
+    font-size: 0.9em;
+  }
+
+  .project p {
+    margin: 0 0 0.75rem;
+    color: var(--kv-muted);
+    font-size: 0.95rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: auto 0 0;
+    padding: 0;
+  }
+
+  .stack li {
+    margin: 0;
+    padding: 0 0.45rem;
+    list-style: none;
+    border: 1px solid var(--kv-border);
+    color: var(--kv-cyan);
+    font-family: var(--kv-font-mono);
+    font-size: 0.72rem;
+  }
+</style>

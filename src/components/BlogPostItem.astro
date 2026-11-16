@@ -1,30 +1,97 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import TagsList from "./TagsList.astro";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+}
 
 const { post } = Astro.props;
 ---
 
-<article>
-    <a href={`/${post.slug}/`}>
-        <h3 class="title">{post.data.title}</h3>
-    </a>
-
-    <p class="description">{post.data.description}</p>
-
-    <p>
+<article class="post-item">
+    <div class="date">
         <FormattedDate date={post.data.date} />
-    </p>
-
-    <TagsList tags={post.data.tags} />
+    </div>
+    <div class="body">
+        <h3 class="title">
+            <a href={`/${post.slug}/`}>{post.data.title}</a>
+        </h3>
+        <p class="description">{post.data.description}</p>
+        <TagsList tags={post.data.tags} />
+    </div>
 </article>
 
 <style>
-    article {
-        width: 100%;
-        text-align: center;
+    .post-item {
+        display: grid;
+        grid-template-columns: 7.5rem 1fr;
+        gap: 1.25rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--kv-border);
     }
+
+    .date {
+        padding-top: 0.3rem;
+        color: var(--kv-muted);
+        font-family: var(--kv-font-mono);
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .title {
+        margin: 0 0 0.4rem;
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+
+    .title a {
+        color: var(--kv-heading);
+        background-image: linear-gradient(
+            var(--kv-accent-fill),
+            var(--kv-accent-fill)
+        );
+        background-size: 0% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition:
+            background-size 0.25s ease,
+            color var(--kv-transition);
+    }
+
+    .title a:hover {
+        color: var(--kv-accent);
+        background-size: 100% 2px;
+    }
+
+    /* Light mode: the yellow grows into a full highlighter block behind the
+       title, and the text stays dark (like the "code" highlight in the intro). */
+    :global(:root:not([data-theme="dark"])) .title a {
+        padding: 0 0.15em;
+        margin: 0 -0.15em;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+
+    :global(:root:not([data-theme="dark"])) .title a:hover {
+        color: var(--kv-accent-ink);
+        background-size: 100% 100%;
+    }
+
     .description {
-        color: var(--muted);
+        margin: 0 0 0.75rem;
+        color: var(--kv-muted);
+        font-size: 0.975rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            grid-template-columns: 1fr;
+            gap: 0.3rem;
+        }
+        .date {
+            padding-top: 0;
+        }
     }
 </style>

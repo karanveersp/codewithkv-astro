@@ -6,25 +6,13 @@ interface Props {
 const { date } = Astro.props;
 ---
 
-<div class="time">
-    <i class="bx bx-calendar"></i>
-    <time datetime={date.toISOString()}>
-        {
-            date.toLocaleDateString("en-us", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-            })
-        }
-    </time>
-</div>
-
-<style>
-    .time {
-        color: var(--pico-muted-color);
-        font-size: medium;
+<time datetime={date.toISOString()}>
+    {
+        date.toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            timeZone: "UTC",
+        })
     }
-    .bx {
-        margin-right: 10px;
-    }
-</style>
+</time>
