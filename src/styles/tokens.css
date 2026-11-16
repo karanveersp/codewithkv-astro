@@ -1,0 +1,117 @@
+/*
+  Design tokens: the only place colors, fonts and sizes are defined, and the
+  only place that knows about light vs dark theme.
+
+  Colors use light-dark(LIGHT, DARK), which follows `color-scheme`:
+  - With no data-theme (JS off), it follows the OS setting.
+  - The theme toggle sets data-theme="light" | "dark" on <html> to force one.
+
+  Components should use these tokens and never check the theme themselves.
+*/
+
+:root {
+    color-scheme: light dark;
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+:root {
+    /* ---- Fonts ---- */
+    --kv-font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI",
+        sans-serif;
+    --kv-font-display: "Space Grotesk Variable", "Inter Variable", system-ui,
+        sans-serif;
+    --kv-font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
+        Menlo, Consolas, monospace;
+
+    /* ---- Type scale ---- */
+    --kv-text-2xs: 0.72rem; /* stack pills */
+    --kv-text-xs: 0.75rem; /* tags, code headers */
+    --kv-text-sm: 0.85rem; /* meta, labels, nav, TOC */
+    --kv-text-md: 1rem;
+    --kv-text-lg: 1.1rem; /* lede, bio, post body */
+    --kv-text-xl: 1.3rem; /* post list titles, h3 */
+    --kv-text-2xl: 1.6rem; /* h2 */
+    --kv-text-3xl: 2.25rem; /* page titles */
+    --kv-text-display: clamp(2rem, 5vw, 2.75rem); /* post titles */
+    --kv-text-hero: clamp(2rem, 6vw, 3rem); /* homepage headline */
+
+    /* ---- Layout ---- */
+    --kv-content-width: 46rem;
+    --kv-wide-width: 66rem;
+    --kv-radius: 4px;
+    --kv-transition: 0.2s ease;
+
+    /* ---- Palette (light, dark) ---- */
+    --kv-bg: light-dark(#f6f5ef, #0a0b0e);
+    --kv-surface: light-dark(#ffffff, #111318);
+    --kv-surface-2: light-dark(#efede4, #171a21);
+    --kv-border: light-dark(#dcd9cc, #262a33);
+    --kv-text: light-dark(#1c1e23, #d3d8e0);
+    --kv-heading: light-dark(#0f1114, #f3f4f6);
+    --kv-muted: light-dark(#5c616d, #8b93a3);
+
+    /* Accent for text, icons and small marks. Yellow is unreadable as text on
+       the light background, so light mode uses Venetian red. */
+    --kv-accent: light-dark(#c80815, #f8e71c);
+    --kv-accent-hover: light-dark(#960610, #fff27a);
+
+    /* Yellow fills (highlights, buttons) and the text that sits on them. */
+    --kv-accent-fill: light-dark(#f5d90a, #f8e71c);
+    --kv-accent-ink: #14140f;
+    --kv-accent-soft: light-dark(
+        rgba(245, 217, 10, 0.28),
+        rgba(248, 231, 28, 0.14)
+    );
+
+    --kv-cyan: light-dark(#00707a, #3fe0e8); /* inline code, tech stacks */
+    --kv-grid: light-dark(rgba(20, 20, 15, 0.045), rgba(248, 231, 28, 0.035));
+    --kv-glow-color: light-dark(transparent, rgba(248, 231, 28, 0.35));
+    --kv-glow: 0 0 18px var(--kv-glow-color);
+
+    --kv-diff-add: #2ea043;
+    --kv-diff-add-bg: rgba(46, 160, 67, 0.15);
+    --kv-diff-remove: #f85149;
+    --kv-diff-remove-bg: rgba(248, 81, 73, 0.15);
+
+    /* ---- Links (see .kv-mark in utilities.css) ----
+       Light: dark text on a yellow marker stroke; hover fills the block.
+       Dark: yellow text on a thin underline; hover thickens it. */
+    --kv-link-color: light-dark(var(--kv-heading), var(--kv-accent));
+    --kv-link-hover-color: light-dark(
+        var(--kv-accent-ink),
+        var(--kv-accent-hover)
+    );
+}
+
+/* Non-color tokens can't use light-dark(), so they switch on the theme here.
+   Light is the default; dark applies when forced or when the OS prefers it. */
+:root {
+    --kv-link-mark-rest: 100% 0.35em;
+    --kv-link-mark-hover: 100% 100%;
+    /* For elements that only appear in one theme: display: var(--kv-show-in-dark) */
+    --kv-show-in-light: inline-block;
+    --kv-show-in-dark: none;
+}
+
+[data-theme="dark"] {
+    --kv-link-mark-rest: 100% 1px;
+    --kv-link-mark-hover: 100% 2px;
+    --kv-show-in-light: none;
+    --kv-show-in-dark: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --kv-link-mark-rest: 100% 1px;
+        --kv-link-mark-hover: 100% 2px;
+        --kv-show-in-light: none;
+        --kv-show-in-dark: inline-block;
+    }
+}

@@ -1,0 +1,107 @@
+/*
+  Fenced code blocks. Markup comes from Shiki plus the code-chrome transformer
+  in astro.config.mjs:
+
+    div.code-block.kv-notch
+      div.code-header > span.code-lang + button.code-copy
+      pre.astro-code > code > span.line
+*/
+
+.code-block {
+    margin: 1.75rem 0;
+    border: 1px solid var(--kv-border);
+    background: var(--kv-surface);
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.35rem 0.6rem 0.35rem 1rem;
+    border-bottom: 1px solid var(--kv-border);
+    background: var(--kv-surface-2);
+    font-family: var(--kv-font-mono);
+    font-size: var(--kv-text-xs);
+    text-transform: lowercase;
+}
+
+.code-lang {
+    color: var(--kv-accent);
+    letter-spacing: 0.05em;
+}
+
+.code-copy {
+    all: unset;
+    cursor: pointer;
+    padding: 0.15rem 0.6rem;
+    margin-right: 0.4rem;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+    color: var(--kv-muted);
+    transition:
+        color var(--kv-transition),
+        border-color var(--kv-transition);
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+    color: var(--kv-accent);
+    border-color: var(--kv-accent);
+}
+
+.code-copy[data-copied] {
+    color: var(--kv-accent-ink);
+    background: var(--kv-accent-fill);
+    border-color: var(--kv-accent-fill);
+}
+
+pre.astro-code {
+    margin: 0;
+    padding: 1rem 0;
+    border-radius: 0;
+    /* Shiki sets an inline background; the block's surface color is used instead. */
+    background: transparent !important;
+    font-family: var(--kv-font-mono);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    overflow-x: auto;
+    /* Show == and => as typed, which matters in tutorials. */
+    font-variant-ligatures: none;
+}
+
+pre.astro-code code {
+    display: block;
+    min-width: fit-content;
+    padding: 0;
+    background: none;
+    font-size: inherit;
+}
+
+pre.astro-code .line {
+    display: inline-block;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/* Shiki emits both themes' colors as variables; light-dark() picks one. */
+.astro-code span {
+    color: light-dark(var(--shiki-light), var(--shiki-dark));
+}
+
+/* Line highlighting from ```lang {2,4-5} or // [!code highlight] */
+pre.astro-code .line.highlighted {
+    background: var(--kv-accent-soft);
+    box-shadow: inset 3px 0 0 var(--kv-accent-fill);
+}
+
+/* Diff markers from // [!code ++] and // [!code --] */
+pre.astro-code .line.diff.add {
+    background: var(--kv-diff-add-bg);
+    box-shadow: inset 3px 0 0 var(--kv-diff-add);
+}
+
+pre.astro-code .line.diff.remove {
+    background: var(--kv-diff-remove-bg);
+    box-shadow: inset 3px 0 0 var(--kv-diff-remove);
+    opacity: 0.75;
+}

@@ -1,0 +1,82 @@
+/*
+  Reusable patterns shared by several components. Each one is configured with
+  local custom properties (no --kv- prefix) instead of copy-pasted variants.
+*/
+
+/* Small monospace section label, e.g. "// latest posts". */
+.kv-label {
+    font-family: var(--kv-font-mono);
+    font-size: var(--kv-text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--kv-muted);
+}
+
+.kv-label::before {
+    content: "// ";
+    color: var(--kv-accent);
+}
+
+/* Page heading block used on About, Projects and Tags. */
+.page-title {
+    margin-bottom: 2rem;
+}
+
+.page-title h1 {
+    margin: 0.25rem 0 0;
+    font-size: var(--kv-text-3xl);
+}
+
+@media (max-width: 768px) {
+    .page-title h1 {
+        font-size: 1.85rem;
+    }
+}
+
+/*
+  Clipped top-right corner, the site's signature shape.
+  Size it with --notch (default 10px).
+*/
+.kv-notch {
+    clip-path: polygon(
+        0 0,
+        calc(100% - var(--notch, 10px)) 0,
+        100% var(--notch, 10px),
+        100% 100%,
+        0 100%
+    );
+}
+
+/*
+  Highlighter link: a yellow mark under the text that grows on hover.
+  How it looks per theme comes from the --kv-link-* tokens.
+  Override per use with:
+    --mark-color   text color at rest   (default --kv-link-color)
+    --mark-rest    mark size at rest    (default --kv-link-mark-rest)
+  Links inside post bodies get it automatically, since markdown can't add classes.
+*/
+.kv-mark,
+.prose a:not(.heading-anchor) {
+    padding: 0 0.1em;
+    margin: 0 -0.1em;
+    color: var(--mark-color, var(--kv-link-color));
+    text-decoration: none;
+    background-image: linear-gradient(
+        var(--kv-accent-fill),
+        var(--kv-accent-fill)
+    );
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: var(--mark-rest, var(--kv-link-mark-rest));
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition:
+        background-size 0.25s ease,
+        color var(--kv-transition);
+}
+
+.kv-mark:hover,
+.prose a:not(.heading-anchor):hover {
+    color: var(--kv-link-hover-color);
+    background-size: var(--kv-link-mark-hover);
+}

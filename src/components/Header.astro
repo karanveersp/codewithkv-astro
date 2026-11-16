@@ -95,14 +95,14 @@ import Logo from "./Logo.astro";
         gap: 0.4rem;
         color: var(--kv-heading);
         font-family: var(--kv-font-mono);
-        font-size: 1.05rem;
+        font-size: var(--kv-text-md);
         font-weight: 600;
     }
 
     .brand :global(svg) {
         height: 34px;
         width: auto;
-        color: var(--kv-logo);
+        color: var(--kv-accent);
         transition: filter var(--kv-transition);
     }
 
@@ -135,7 +135,7 @@ import Logo from "./Logo.astro";
     .bar ul a {
         color: var(--kv-muted);
         font-family: var(--kv-font-mono);
-        font-size: 0.875rem;
+        font-size: var(--kv-text-sm);
         margin: 0;
         padding: 0;
     }

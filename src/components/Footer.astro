@@ -21,18 +21,13 @@
     img {
         height: 1em;
     }
-    :global(.dark) #astroDark {
-        display: inline-block;
-    }
-    :global(.dark) #astroLight {
-        display: none;
-    }
 
     #astroLight {
-        display: inline-block;
+        display: var(--kv-show-in-light);
     }
+
     #astroDark {
-        display: none;
+        display: var(--kv-show-in-dark);
     }
 
     footer {
@@ -42,7 +37,7 @@
         border-top: 1px solid var(--kv-border);
         color: var(--kv-muted);
         font-family: var(--kv-font-mono);
-        font-size: 0.8rem;
+        font-size: var(--kv-text-sm);
         text-align: center;
     }
 

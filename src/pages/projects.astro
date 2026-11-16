@@ -53,7 +53,7 @@ const projects = [
   <ul class="projects">
     {
       projects.map((p) => (
-        <li class="project">
+        <li class="project kv-notch">
           <h2>
             <a href={p.href} target="_blank" rel="noopener">
               {p.name}
@@ -98,13 +98,7 @@ const projects = [
     list-style: none;
     border: 1px solid var(--kv-border);
     background: var(--kv-surface);
-    clip-path: polygon(
-      0 0,
-      calc(100% - 14px) 0,
-      100% 14px,
-      100% 100%,
-      0 100%
-    );
+    --notch: 14px;
     transition: border-color var(--kv-transition);
   }
 
@@ -114,7 +108,7 @@ const projects = [
 
   .project h2 {
     margin: 0 0 0.5rem;
-    font-size: 1.15rem;
+    font-size: var(--kv-text-lg);
   }
 
   .project h2 a {
@@ -134,7 +128,7 @@ const projects = [
   .project p {
     margin: 0 0 0.75rem;
     color: var(--kv-muted);
-    font-size: 0.95rem;
+    font-size: var(--kv-text-md);
   }
 
   .stack {
@@ -152,6 +146,6 @@ const projects = [
     border: 1px solid var(--kv-border);
     color: var(--kv-cyan);
     font-family: var(--kv-font-mono);
-    font-size: 0.72rem;
+    font-size: var(--kv-text-2xs);
   }
 </style>
