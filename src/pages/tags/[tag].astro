@@ -38,16 +38,17 @@ const sortedPosts = posts
 ---
 
 <BaseLayout title={tag} description={`Posts matching tag - ${tag}`}>
-    <h1>{tag} posts</h1>
+    <header class="page-title">
+        <p class="kv-label">tagged</p>
+        <h1><span class="hash">#</span>{tag}</h1>
+    </header>
     <section>
         {sortedPosts.map((post: any) => <BlogPostItem post={post} />)}
     </section>
 </BaseLayout>
 
 <style>
-    h1 {
-        text-align: center;
-        margin-bottom: 2em;
-        text-transform: capitalize;
+    .hash {
+        color: var(--kv-accent);
     }
 </style>

@@ -3,6 +3,9 @@
 // all pages through the use of the <BaseHead /> component.
 
 import "@picocss/pico";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/jetbrains-mono";
 import "../styles/global.css";
 import { ViewTransitions } from "astro:transitions";
 
@@ -21,6 +24,23 @@ const { title, description } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/logo-whitebg.svg" />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Apply the saved theme before first paint to avoid a light/dark flash. -->
+<script is:inline>
+    (() => {
+        let theme = null;
+        try {
+            theme = localStorage.getItem("theme");
+        } catch {}
+        if (!theme) {
+            theme = matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.add(theme);
+    })();
+</script>
 <link
     rel="stylesheet"
     href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"

@@ -12,9 +12,16 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+
+// ~220 words per minute, ignoring fenced code blocks.
+const words = post.body
+    .replace(/```[\s\S]*?```/g, "")
+    .split(/\s+/)
+    .filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(words / 220));
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} headings={headings} readingTime={readingTime}>
     <Content />
 </BlogPost>
