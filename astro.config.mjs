@@ -24,7 +24,7 @@ const transformerCodeChrome = {
         const lang = this.options.lang;
         const label = !lang || lang === "plaintext" ? "text" : lang;
         root.children = [
-            el("div", { className: ["code-block"] }, [
+            el("div", { className: ["code-block", "kv-notch"] }, [
                 el("div", { className: ["code-header"] }, [
                     el("span", { className: ["code-lang"] }, [
                         { type: "text", value: label },

@@ -1,0 +1,92 @@
+/* Element defaults and page layout. */
+
+html {
+    overflow-y: scroll;
+    scroll-padding-top: 1.5rem;
+}
+
+body {
+    background-color: var(--kv-bg);
+    /* Faint grid behind everything. */
+    background-image:
+        linear-gradient(var(--kv-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--kv-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-attachment: fixed;
+    font-size: 1.0625rem;
+    transition:
+        background-color var(--kv-transition),
+        color var(--kv-transition);
+}
+
+body > main {
+    width: 100%;
+    max-width: var(--kv-content-width);
+    margin: 0 auto;
+    padding: 2rem 1rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--kv-font-display);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: var(--kv-accent);
+    text-decoration: none;
+    transition: color var(--kv-transition);
+}
+
+a:hover {
+    color: var(--kv-accent-hover);
+}
+
+::selection {
+    background: var(--kv-accent-soft);
+}
+
+:focus-visible {
+    outline: 2px solid var(--kv-accent-fill);
+    outline-offset: 2px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--kv-border);
+}
+
+/* Pico styles <article> as a card; keep it flat. */
+article {
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* Inline code, anywhere on the site. */
+:not(pre) > code {
+    font-family: var(--kv-font-mono);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--kv-border);
+    border-radius: var(--kv-radius);
+    background: var(--kv-surface-2);
+    color: var(--kv-cyan);
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: var(--kv-text-md);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
